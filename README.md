@@ -51,8 +51,45 @@ ssu-housing-analysis/
 3. **논리적 일관성 검증**: 금액 및 면적의 양수 조건, `건축년도 <= 계약년도` 검증, 반지하층 이하 층수 표기 통일
 4. **중복 데이터 제거**: 동일 매물/날짜/금액의 중복 수집 데이터(100% 중복)를 제거하고 최신 1건만 유지
 
----
+## 🛠️ 개발 환경 구축 및 실행 방법
 
-## 🛠️ 다음 개발 단계
-- 공공데이터포털 API 연동용 파이썬 환경 구축 (`requirements.txt` 생성 및 라이브러리 설치)
-- `srcs/` 폴더 내 API 수집 모듈 개발 및 실행 스크립트 작성
+본 프로젝트는 Windows 및 macOS 환경 모두에서 호환되는 실행 환경을 지원합니다.
+
+### 1. Conda 가상환경 생성 및 활성화
+안정적인 패키지 관리를 위해 Conda를 활용하여 `Python 3.11` 환경을 구축합니다.
+
+```bash
+# 1) python 3.11 기반의 가상환경 생성 (최초 1회 실행)
+conda create -n ssu-housing python=3.11 -y
+
+# 2) 가상환경 활성화
+conda activate ssu-housing
+```
+
+### 2. 필수 라이브러리 설치
+프로젝트 루트 디렉토리에서 아래 명령어를 실행하여 필요한 패키지들을 설치합니다.
+
+```bash
+pip install -r requirements.txt
+```
+
+### 3. API 키 설정 (로컬 환경 변수)
+공공데이터포털에서 발급받은 API 인증키를 안전하게 관리하기 위해 로컬 환경 변수 설정을 진행합니다.
+
+```bash
+# .env.template 파일을 기반으로 로컬용 .env 파일 생성
+cp .env.template .env
+```
+생성된 `.env` 파일 내부의 `SERVICE_KEY` 항목에 발급받은 실거래가 API 인증키(디코딩된 키 권장)를 입력해 줍니다. 
+*(참고: `.env` 파일은 [.gitignore](file:///Users/seungjun/Desktop/projects/ssu-housing-analysis/.gitignore)에 등록되어 있으므로 Git 저장소에 커밋되지 않습니다.)*
+
+### 4. 프로그램 실행 테스트
+모든 설정이 완료되었다면 아래 명령어를 수행하여 기본 뼈대 코드를 실행합니다.
+
+```bash
+python srcs/main.py
+```
+**정상 실행 시 출력 예시**:
+```text
+숭실대학교 대학가 주거 환경 분석 프로젝트 (SSU Housing Analysis) 실행 완료
+```
