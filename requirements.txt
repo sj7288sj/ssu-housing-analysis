@@ -1,4 +1,8 @@
 pandas
-requests
-python-dotenv
-ipykernel
+numpy
+scikit-learn
+matplotlib
+seaborn
+jupyter
+folium
+joblib
